@@ -40,7 +40,7 @@
  extern "C" {
 #endif
 
-#include "mxconstants.h" 
+#include "defines.h" 
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
