@@ -1,6 +1,5 @@
 #include "main.h"
 
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
@@ -15,11 +14,7 @@ int main(void) {
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
 
-//    led_on(LED2);
     while (1) {
-//        HAL_Delay(500);
-        //      led_toggle(LED1);
-        //      led_toggle(LED2);
     }
 }
 
