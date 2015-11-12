@@ -176,7 +176,8 @@ void BTN_Init(Button_TypeDef button, ButtonMode_TypeDef mode);
 char read_the_button(Button_TypeDef button);
 
 /**
- * This function will return debounced state of the button.
+ * This function will return de-bounced state of the button.
+ * Algorithm is very simple, we just wait some time and then read the appropriate bit.
  */
 char button_is_pressed(Button_TypeDef button);
 

@@ -1,20 +1,8 @@
 #include <main.h>
-#include <stm32f407xx.h>
-#include <dcc_stdio.h>
 
 int main(void) {
     init_peripherals();
-    dbg_write_str("Peripherals initialized.");
-//    LED_On(LED1);
-//    BTN_Init(BTN1, BTN_MODE_EXTI);
-//    LED_On(LED2);
-//    BTN_Init(BTN2, BTN_MODE_EXTI);
-//    LED_On(LED1);
-//    LED_On(LED2);
     while (1) {
-//        for (int i = 0; i < 1000000; i++);
-//        LED_Toggle(LED1);
-//        LED_Toggle(LED2);
     }
 }
 
@@ -25,8 +13,6 @@ void init_peripherals() {
     LED_Init(LED2);
     BTN_Init(BTN1, BTN_MODE_EXTI);
     BTN_Init(BTN2, BTN_MODE_EXTI);
-    dbg_write_u32(SYSCFG->EXTICR, 4);
-    dbg_write_u32(&(EXTI->IMR), 1);
 }
 
 void LED_Init(Led_TypeDef led) {
@@ -72,7 +58,8 @@ void BTN_Init(Button_TypeDef button, ButtonMode_TypeDef mode) {
         BTN_PORT[button]->PUPDR &= ~(3 << (BTN_PIN[button] << 1));
         /* Configure external lines */
         SYSCFG->EXTICR[BTN_EXTICR[button]] |= BTN_EXTI_CONF[button];
-        /* Set interrupt to trigger on the rising edge */
+        /* Set interrupt to trigger on the rising and failing edge */
+        EXTI->RTSR |= (EXTI_RTSR_TR0 << BTN_PIN[button]);
         EXTI->RTSR |= (EXTI_RTSR_TR0 << BTN_PIN[button]);
         /* Unmask corresponding interrupt */
         EXTI->IMR |= BTN_INT_MASK[button];
@@ -87,17 +74,21 @@ void BTN_Init(Button_TypeDef button, ButtonMode_TypeDef mode) {
 }
 
 void EXTI0_IRQHandler(void) {
+    __disable_irq();
     EXTI->PR |= EXTI_PR_PR0;
     if (button_is_pressed(BTN1)) {
         LED_Toggle(LED2);
     }
+    __enable_irq();
 }
 
 void EXTI15_10_IRQHandler(void) {
+    __disable_irq();
     EXTI->PR |= EXTI_PR_PR10;
     if (button_is_pressed(BTN2)) {
         LED_Toggle(LED1);
     }
+    __enable_irq();
 }
 
 char read_the_button(Button_TypeDef button) {
@@ -105,16 +96,8 @@ char read_the_button(Button_TypeDef button) {
 }
 
 char button_is_pressed(Button_TypeDef button) {
-    int hits = 0;
-
-    for(int i = 0; i < 10; i++) {
-        if(read_the_button(button)) {
-            hits ++;
-        }
-        for (int j = 0; j < 25; j++);
-    }
-
-    return hits > 5;
+    for (int i = 0; i < 200; i++);
+    return read_the_button(button);
 }
 
 void _init() { }
