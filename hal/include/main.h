@@ -13,7 +13,7 @@ typedef enum {
 } Button_TypeDef;
 
 
-/* Debounced statatus of all buttons at any time */
+/* Debounced statuses of all buttons at any time */
 volatile unsigned int debounced_buttons;
 
 /* Reads the pin state of the given button. */

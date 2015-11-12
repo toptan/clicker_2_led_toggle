@@ -33,3 +33,4 @@
 
 # Output and generated directories
 build/
+workspace.xml

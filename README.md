@@ -8,6 +8,9 @@ There are four sub directories, each having the code that does the very same thi
  * cmake-hal subdirectory contains example with CMake and uses STM HAL library
  * cmake-raw subdirectory contains example with CMake and does not use STM HAL library
 
+OpenOCD start command:
+openocd -f /opt/local/share/openocd/scripts/interface/stlink-v2.cfg -f /opt/local/share/openocd/scripts/target/stm32f4x.cfg
+
 The code is tested with Mikroelektronika Clicker 2 for STM32 board http://www.mikroe.com/stm32/clicker-2/
 
 
