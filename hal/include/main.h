@@ -12,14 +12,13 @@ typedef enum {
     BUTTON2 = 1
 } Button_TypeDef;
 
-
-/* Debounced statuses of all buttons at any time */
-volatile unsigned int debounced_buttons;
-
 /* Reads the pin state of the given button. */
 GPIO_PinState read_the_button(Button_TypeDef button);
 
-/* This function will return debounced state of the button. The algorithm is The Majority Vote. */
+/**
+ * This function will return de-bounced state of the button.
+ * Algorithm is very simple, we just wait some time and then read the appropriate bit.
+ */
 char button_is_pressed(Button_TypeDef button);
 
 void led_on(Led_TypeDef Led);

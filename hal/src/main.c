@@ -76,22 +76,14 @@ void led_toggle(Led_TypeDef Led) {
 }
 
 void EXTI0_IRQHandler(void) {
-    /*if (__HAL_GPIO_EXTI_GET_FLAG(BTN1_Pin) != RESET) {*/
-    /*if (HAL_GPIO_ReadPin(GPIOE, BTN1_Pin)) {*/
-    /*HAL_GPIO_EXTI_IRQHandler(BTN1_Pin);*/
-    /*}*/
-    /*}*/
+    /* No need to disable interrupts here as HAL does that for us. */
     if (button_is_pressed(BUTTON1)) {
         HAL_GPIO_EXTI_IRQHandler(BTN1_Pin);
     }
 }
 
 void EXTI15_10_IRQHandler(void) {
-    /*if (__HAL_GPIO_EXTI_GET_FLAG(BTN2_Pin) != RESET) {*/
-    /*if (HAL_GPIO_ReadPin(GPIOA, BTN2_Pin)) {*/
-    /*HAL_GPIO_EXTI_IRQHandler(BTN2_Pin);*/
-    /*}*/
-    /*}*/
+    /* No need to disable interrupts here as HAL does that for us. */
     if (button_is_pressed(BUTTON2)) {
         HAL_GPIO_EXTI_IRQHandler(BTN2_Pin);
     }
@@ -119,41 +111,6 @@ GPIO_PinState read_the_button(Button_TypeDef button) {
 }
 
 char button_is_pressed(Button_TypeDef button) {
-    unsigned int temp;
-    /* button_bits[] is an array to hold the previous states of the port pin value
-     * Each element holds the previous samples of teh button read.
-     * We need as many elements as there are buttons.
-     * Make this an integer array if more than 8 samples are needed for debounce determination.
-     * if less samples are needed adjust the MAJORITY_VOTE and STABILITY_BITS to a smaller number
-     */
-    volatile static unsigned char button_bits[MAX_BUTTONS];
-    /* Shift the latest read button status into the que
-     * we should have the latest sample in LSB and older samples
-     * higher up.
-     */
-    button_bits[button] = button_bits[button] << 1 | (read_the_button(button) & 0x01);
-    temp = button_bits[button];
-
-    /* Check if the input is stable in the last STABILITY_BITS samples */
-    if ((temp & STABILITY_MASK) == STABILITY_MASK) {
-        unsigned int bit_count = 0;
-
-        /* Count the number of bits set in temp, we need more than the majority
-         * straight out of the book of K&R, check it :-)*/
-        while ((temp = (temp & (temp - 1)))) {
-            bit_count++;
-        }
-
-        bit_count++; // we are off by one
-
-        /*Check if the required number of samples were favourable */
-        if (bit_count >= MAJORITY_VOTE) {
-            button_bits[button] = 0;
-            return 1;
-        } else {
-            return 0;
-        }
-    } else {
-        return 0;
-    }
+    HAL_Delay(200);
+    return read_the_button(button);
 }
