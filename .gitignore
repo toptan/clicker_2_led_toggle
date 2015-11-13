@@ -32,5 +32,9 @@
 *.dSYM/
 
 # Output and generated directories
+.idea/
 build/
 workspace.xml
+
+# Various unnecessary files
+.DS_Store
