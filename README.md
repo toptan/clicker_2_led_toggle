@@ -18,23 +18,23 @@ There are four sub directories, each having the code that does the very same thi
 Simply go to one of the project directories and execute make
 
 ## CMake examples build instructions
-1. Create build dir outside the source tree
-2. Execute cmake -DCMAKE_TOOLCHAIN_FILE=&ltpath-to-arm-toolchain.cmake&gt &ltpath-to-project-sources&gt
-3. Execute make
+1. Create build dir outside the source tree and enter it.
+2. Execute `cmake -DCMAKE_TOOLCHAIN_FILE=\<path-to-arm-toolchain.cmake\> \<path-to-project-sources\>`
+3. Execute `make`
 
 The toolchain file is located in subdirectory cmake and is named arm-toolchain.cmake
 
 ## Flasing image to the device
 1. Connect device via USB
-2. Execute mikroe-uhb image.hex
+2. Execute `mikroe-uhb image.hex`
 3. Reset or cycle power on the clicker 2 device
 
 ## Running OpenOCD
 To run OpenOCD for clicker 2 device execute:
 
-openocd -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f /usr/share/openocd/scripts/target/stm32f4x.cfg
+`openocd -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f /usr/share/openocd/scripts/target/stm32f4x.cfg`
 
-_On OS X paths to openocd configuration files may differ_
+_On OS X paths to openocd configuration files may differ depending on the way how OpenOCD is installed._
 
 The code is tested with Mikroelektronika Clicker 2 for STM32 board http://www.mikroe.com/stm32/clicker-2/
 
