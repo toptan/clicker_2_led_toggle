@@ -19,7 +19,7 @@ Simply go to one of the project directories and execute make
 
 ## CMake examples build instructions
 1. Create build dir outside the source tree
-2. Execute cmake -DCMAKE_TOOLCHAIN_FILE=<path-to-arm-toolchain.cmake> <path-to-project-sources>
+2. Execute cmake -DCMAKE_TOOLCHAIN_FILE=&lt<path-to-arm-toolchain.cmake&gt &ltpath-to-project-sources&gt
 3. Execute make
 
 The toolchain file is located in subdirectory cmake and is named arm-toolchain.cmake
@@ -33,6 +33,7 @@ The toolchain file is located in subdirectory cmake and is named arm-toolchain.c
 To run OpenOCD for clicker 2 device execute:
 
 openocd -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f /usr/share/openocd/scripts/target/stm32f4x.cfg
+
 _On OS X paths to openocd configuration files may differ_
 
 The code is tested with Mikroelektronika Clicker 2 for STM32 board http://www.mikroe.com/stm32/clicker-2/
