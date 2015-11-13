@@ -19,7 +19,7 @@ Simply go to one of the project directories and execute make
 
 ## CMake examples build instructions
 1. Create build dir outside the source tree and enter it.
-2. Execute `cmake -DCMAKE_TOOLCHAIN_FILE=\<path-to-arm-toolchain.cmake\> \<path-to-project-sources\>`
+2. Execute `cmake -DCMAKE_TOOLCHAIN_FILE=<path-to-arm-toolchain.cmake> <path-to-project-sources>`
 3. Execute `make`
 
 The toolchain file is located in subdirectory cmake and is named arm-toolchain.cmake
