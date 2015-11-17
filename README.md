@@ -10,8 +10,8 @@ There are four sub directories, each having the code that does the very same thi
 
 ## Requirements ##
 - arm-none-eabi gcc toolchain. On Fedora package is **arm-none-eabi-gcc-cs**, on Ubuntu package is **gcc-arm-none-eabi**
-- cmake minimum version 2.8.11
-- mikroe-uhb from https://github.com/thotypous/mikroe-uhb
+- CMake minimum version 2.8.11
+- mikroe-uhb from [https://github.com/thotypous/mikroe-uhb](https://github.com/thotypous/mikroe-uhb)
 - OpenOCD - optional
 
 ## Makefile examples build instructions
